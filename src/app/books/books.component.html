@@ -1,0 +1,74 @@
+<div *ngIf="!books"><span>Books list empty</span></div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Height</th>
+        <th scope="col">Publisher</th>
+        <th>Manage</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{ book.height }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>
+            <p-button (click)="showEditFormDialog(book)" icon="pi pi-pencil"></p-button> &nbsp;
+            <p-button (click)="showDeletionDialog(book)" icon="pi pi-trash" ></p-button></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+<p-paginator
+    (onPageChange)="getBooks()"
+    [first]="thePageNumber"
+               [rows]="thePageSize"
+               [totalRecords]="theTotalElements"
+               ></p-paginator>
+<p-dialog header="Header" [(visible)]="editPopUp" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <form [formGroup]="editBookForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="email" class="form-control" id="title" aria-describedby="emailHelp" formControlName="title" placeholder="Enter Title" ngModel="{{selectedBook?.title}}">
+          <!--  <small id="title" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        --></div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="email" class="form-control" id="author" aria-describedby="emailHelp" formControlName="author" placeholder="Enter Author" ngModel="{{selectedBook?.author}}">
+         <!--   <small id="author" class="form-text text-muted">We'll never share your email with anyone else.</small>
+       --> </div>
+        <div class="form-group">
+            <label for="genre">Genre</label>
+            <input type="email" class="form-control" id="genre" aria-describedby="emailHelp" formControlName="genre" placeholder="Enter Genre" ngModel="{{selectedBook?.genre}}">
+        <!--    <small id="genre" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      -->  </div>
+        <div class="form-group">
+            <label for="height">Height</label>
+            <input type="email" class="form-control" id="height" aria-describedby="emailHelp" formControlName="height" placeholder="Enter Height" ngModel="{{selectedBook?.height}}">
+       <!--     <small id="height" class="form-text text-muted">We'll never share your email with anyone else.</small>
+       --> </div>
+        <div class="form-group">
+            <label for="publisher">Publisher</label>
+            <input type="email" class="form-control" id="publisher" aria-describedby="emailHelp" formControlName="publisher" placeholder="Enter Publisher" ngModel="{{selectedBook?.publisher}}">
+         <!--   <small id="publisher" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        --></div>
+        <button (click)="editBook()" class="btn btn-primary">Edit</button>
+    </form>
+</p-dialog>
+
+<p-dialog header="Confirmation" [(visible)]="deletePopUp" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <p class="m-0">
+        Confirm to proceed this action
+    </p>
+    <div class="d-flex justify-content-end"><button (click)="deleteBook()" class="btn btn-danger">Delete</button></div><br>
+
+</p-dialog>

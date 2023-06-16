@@ -1,0 +1,27 @@
+<div class="grid p-fluid">
+    <div class="col-6 lg:col-6">
+
+
+        <div class="card flex flex-column align-items-center">
+            <h5 class="text-left w-full">Pie Chart</h5>
+            <p-chart type="pie" [data]="pieData" [options]="pieOptions" [style]="{'width': '50%'}"></p-chart>
+        </div>
+
+        <div class="card flex flex-column align-items-center">
+            <h5 class="text-left w-full">Polar Area Chart</h5>
+            <p-chart type="polarArea" [data]="polarData" [options]="polarOptions" [style]="{'width': '50%'}"></p-chart>
+        </div>
+    </div>
+    <div class="col-6 lg:col-6">
+
+
+        <div class="card flex flex-column align-items-center">
+            <h5 class="text-left w-full">Stacked Bar Chart</h5>
+
+                <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+
+
+
+
+    </div>
+</div>
